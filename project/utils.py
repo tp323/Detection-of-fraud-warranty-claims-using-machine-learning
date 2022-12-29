@@ -28,15 +28,15 @@ if __name__ == '__main__':
     data = csv_data.drop("ID", axis='columns')
     treat_vals(data)
     for n in columns_with_strings:
-        print(n, " -> ", find_domain(data[n]))
+        print(n, "=", find_domain(data[n]))
 
 # Unique values
-# Area  ->  ['Urban', 'Rural']
-# Consumer_profile  ->  ['Personal', 'Business']
-# Product_category  ->  ['Entertainment', 'Household']
-# Product_type  ->  ['TV', 'AC']
-# Purchased_from  ->  ['Manufacturer', 'Dealer', 'Internet']
-# Purpose  ->  ['Complaint', 'Claim', 'claim', 'Other']
+# Area = ['Rural', 'Urban']
+# Consumer_profile = ['Personal', 'Business']
+# Product_category = ['Household', 'Entertainment']
+# Product_type = ['AC', 'TV']
+# Purchased_from = ['Manufacturer', 'Dealer', 'Internet']
+# Purpose = ['Other', 'claim', 'Claim', 'Complaint']
 
 # Area,Consumer_profile,Product_category,Product_type,AC_1001_Issue,AC_1002_Issue,AC_1003_Issue,TV_2001_Issue,TV_2002_Issue,TV_2003_Issue,Claim_Value,Service_Centre,Product_Age,Purchased_from,Call_details,Purpose,Fraud
 # AC_1001_Issue,AC_1002_Issue,AC_1003_Issue,TV_2001_Issue,TV_2002_Issue,TV_2003_Issue,Claim_Value,Service_Centre,Product_Age,Call_details
