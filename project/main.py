@@ -10,7 +10,7 @@ def treat_vals(data_to_fix):
                            "TV_2003_Issue", "Claim_Value", "Service_Centre", "Product_Age", "Call_details", "Fraud"]
     # should Fraud be here to?
     for i in columns_with_values:
-        data_to_fix[i] = data_to_fix[i].fillna(data_to_fix[i].median())
+        data_to_fix[i] = data_to_fix[i].fillna(data_to_fix[i].mean())
     for i in columns_with_strings:
         data_to_fix[i] = data_to_fix[i].fillna(data_to_fix[i].mode()[0])
 
@@ -31,7 +31,7 @@ def one_hot_encode():
         print(columns_with_strings[cnt], " - ", arr, ": \n", encoded_array)
         cnt += 1
     # TODO(save each encoded array)
-    # TODO(check if its multi column or single aproach )
+    # TODO(check if its multi column or single approach)
 
 
 if __name__ == '__main__':
