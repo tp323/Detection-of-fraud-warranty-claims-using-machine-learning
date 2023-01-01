@@ -10,44 +10,43 @@ from sklearn.compose import make_column_transformer
 UNNECESSARY_COLUMNS = ["ID"]
 
 
-def standardize_data(data):
-    scaler = StandardScaler().fit(data)
-    standardized_data = scaler.transform(data)
-    # print(standardized_data)
-    print(standardized_data.std(axis=0))  # proof of standardization
+def standardize_data(data, x_numeric_cols):
+    scaler = StandardScaler().set_output(transform="pandas")
+    data[x_numeric_cols] = scaler.fit_transform(data[x_numeric_cols])
+    # print(data[x_numeric_cols].std(axis=0))  # proof of standardization
     return data
-
-
-def standardize_x_data(X_train, X_test):
-    # TODO(CHECK IF MORE TREATMENT OF DATA IS REQUIRED FOR Y OR THERE IS NO NEED TO STANDARDIZE y SINCE ITS (1.0, 0.0))
-    X_train_scaled = standardize_data(X_train)
-    X_test_scaled = standardize_data(X_test)
-    return X_train_scaled, X_test_scaled
 
 
 def treat_data(data):
     data["Purpose"] = data["Purpose"].replace("claim", "Claim")  # fix lower case claim
-    categorical_cols = list(data.select_dtypes(include=['object']).columns)
-    x_numeric_cols = list(data.select_dtypes(include=['float64']).columns.values)  # all numeric except Fraud
+    x_num_cols = list(data.select_dtypes(include=['float64']).columns.values)  # all numeric except Fraud
+    si = SimpleImputer()
 
     # column transformers
-    ct_x = make_column_transformer((OneHotEncoder(), categorical_cols), (SimpleImputer(), x_numeric_cols), remainder='passthrough')
+    ct_x_impute = make_column_transformer((si, x_num_cols), remainder='passthrough').set_output(transform="pandas")
 
-    X = data.drop("Fraud", axis='columns')
-    y = data['Fraud']
+    X, y = data.drop("Fraud", axis='columns'), data['Fraud']
 
+    # split data for training and testing
     X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=.9, test_size=.1)
 
-    # one hot encode and fill missing values
-    X_train = ct_x.fit_transform(X_train)
-    X_test = ct_x.fit_transform(X_test)
+    # fill missing values
+    X_train = ct_x_impute.fit_transform(X_train)
+    X_test = ct_x_impute.fit_transform(X_test)
 
-    # TODO(FIX STANDARDIZATION IF BEFORE ENCODING AND FILLING MISSING VALUES THIS WILL EITHER CONTINUE EMPTY OR BE
-    #  FILLED WITH INCORRECT VALUES IF AFTER WE ACCIDENTALLY STANDARDIZE ONE HOT ENCODE VALUES WHICH SHOULD NOT BE DONE
-    #  CANT FILTER TABLES AND DIAGRAM SUGGESTS THAT STANDARDIZATION MUST BE DONE AFTER FILLING MISSING VALUES
-    #  SOLUTION MIGHT JUST BE HARD CODED VALUES WITH THE TABLE NUMBERS TO BE STANDARDIZED FROM INDEX 14 ONWARDS)
-    X_train_scaled, X_test_scaled = standardize_x_data(X_train, X_test)
+    x_num_cols = list(X_train.select_dtypes(include=['float64']).columns.values)  # all numeric except Fraud
 
+    # standardize numerical data
+    standardize_data(X_train, x_num_cols)
+    standardize_data(X_test, x_num_cols)
+
+    # read new table to get new columns names for categorical data
+    categorical_cols = list(X_train.select_dtypes(include=['object']).columns)
+    ct_x_categorical_data = make_column_transformer((OneHotEncoder(), categorical_cols), remainder='passthrough')
+
+    # one hot encode
+    X_train_scaled = ct_x_categorical_data.fit_transform(X_train)
+    X_test_scaled = ct_x_categorical_data.fit_transform(X_test)
     return X_train_scaled, X_test_scaled, y_train, y_test
 
 
