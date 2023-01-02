@@ -1,6 +1,5 @@
 import pandas as pd
-import numpy as np
-
+import os
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.preprocessing import StandardScaler
@@ -17,7 +16,7 @@ def standardize_data(data, x_numeric_cols):
     return data
 
 
-def treat_data(data):
+def treat_data(data, random_state=None):
     data["Purpose"] = data["Purpose"].replace("claim", "Claim")  # fix lower case claim
     x_num_cols = list(data.select_dtypes(include=['float64']).columns.values)  # all numeric except Fraud
     si = SimpleImputer()
@@ -28,7 +27,7 @@ def treat_data(data):
     X, y = data.drop("Fraud", axis='columns'), data['Fraud']
 
     # split data for training and testing
-    X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=.9, test_size=.1)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=.9, test_size=.1, random_state=random_state)
 
     # fill missing values
     X_train = ct_x_impute.fit_transform(X_train)
@@ -50,7 +49,7 @@ def treat_data(data):
     return X_train_scaled, X_test_scaled, y_train, y_test
 
 
-def read_and_treat_data():
-    data = pd.read_csv(r'data\warranty_claims.csv').drop(columns=UNNECESSARY_COLUMNS)
-    return treat_data(data)
-
+def read_and_treat_data(random_state=None):
+    file = os.path.join(os.path.dirname(__file__), r'data\warranty_claims.csv')
+    data = pd.read_csv(file).drop(columns=UNNECESSARY_COLUMNS)
+    return treat_data(data, random_state)
