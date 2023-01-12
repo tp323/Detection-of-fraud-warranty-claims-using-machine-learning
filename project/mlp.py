@@ -1,8 +1,8 @@
 from sklearn.neural_network import MLPClassifier
 
 
-def mlp_predicting(train, test, y_train):
+def mlp_model(x_train, y_train):
     mlp = MLPClassifier()
-    mlp.fit(train, y_train)
-    return mlp.predict(test)
+    mlp.fit(x_train, y_train)
+    return mlp
 

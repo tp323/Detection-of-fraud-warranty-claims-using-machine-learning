@@ -27,7 +27,7 @@ def treat_data(data, random_state=None):
     # y is not treated because it's numeric and does not require fill missing files and standardization
     X_train = full_processor.fit_transform(X_train)
     X_test = full_processor.fit_transform(X_test)
-    return X_train, X_test, y_train, y_test
+    return X_train, X_test, y_train, y_test, full_processor
 
 
 def read_and_treat_data(random_state=None):
