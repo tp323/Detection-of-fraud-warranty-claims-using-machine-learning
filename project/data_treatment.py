@@ -19,21 +19,21 @@ def standardize_data(data, x_numeric_cols):
 def treat_data(data, random_state=None):
     data["Purpose"] = data["Purpose"].replace("claim", "Claim")  # fix lower case claim
     x_num_cols = list(data.select_dtypes(include=['float64']).columns.values)  # all numeric except Fraud
-    si = SimpleImputer()
 
     # column transformers
+    si = SimpleImputer()
     ct_x_impute = make_column_transformer((si, x_num_cols), remainder='passthrough').set_output(transform="pandas")
 
-    X, y = data.drop("Fraud", axis='columns'), data['Fraud']
-
     # split data for training and testing
+    X, y = data.drop("Fraud", axis='columns'), data['Fraud']
     X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=.9, test_size=.1, random_state=random_state)
 
     # fill missing values
     X_train = ct_x_impute.fit_transform(X_train)
     X_test = ct_x_impute.fit_transform(X_test)
 
-    x_num_cols = list(X_train.select_dtypes(include=['float64']).columns.values)  # all numeric except Fraud
+    # rename x_num_cols due to new column names after application of column transformer
+    x_num_cols = list(X_train.select_dtypes(include=['float64']).columns.values)
 
     # standardize numerical data
     standardize_data(X_train, x_num_cols)
