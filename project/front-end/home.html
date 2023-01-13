@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+	<meta charset='utf-8'>
+	<meta http-equiv='X-UA-Compatible' content='IE=edge'>
+	<title>CLAIM FORM</title>
+	<meta name='viewport' content='width=device-width, initial-scale=1'>
+	<link rel='stylesheet' type='text/css' media='screen' href='home.css'>
+	<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
+	<script src="home.js"></script>
+</head>
+<body>
+	<div class="main-content">
+		<div class="head-of-page">
+			<h1>CLAIM FORM</h1>
+		</div>
+		<div class = "content">
+			<form class="form" method="post" enctype="multipart/form-data" action="http://localhost:5000/">
+				<ul class = "form-list">
+					<li>
+						<p><strong>Area</strong></p>
+					</li><li>
+						<input type="radio" id="Rural" name="Area" value="Rural">
+						<label for="Rural">Rural</label><br>
+						<input type="radio" id="Urban" name="Area" value="Urban" checked="checked">
+						<label for="Urban">Urban</label><br>
+					</li><li>
+						<p><strong>Consumer Profile</strong></p>
+					</li><li>
+						<input type="radio" id="Personal" name="Consumer_profile" value="Personal">
+						<label for="Personal">Personal</label><br>
+						<input type="radio" id="Business" name="Consumer_profile" value="Business" checked="checked">
+						<label for="Business">Business</label><br>
+					</li><li>
+						<p><strong>Product Category</strong></p>
+  					</li><li>
+						<input type="radio" id="Household" name="Product_category" value="Household">
+						<label for="Household">Household</label><br>
+						<input type="radio" id="Entertainment" name="Product_category" value="Entertainment" checked="checked">
+						<label for="Entertainment">Entertainment</label><br>
+					</li><li>
+						<p><strong>Product Type</strong></p>
+					</li><li>
+						<input type="radio" id="AC" name="Product_type" value="AC">
+						<label for="AC">AC</label><br>
+						<input type="radio" id="TV" name="Product_type" value="TV" checked="checked">
+						<label for="TV">TV</label><br>
+					</li>
+					<li>
+						<label for="AC_1001_Issue"><strong>AC 1001 Issue</strong></label>
+  						<input type="text" id="AC_1001_Issue" name="AC_1001_Issue" value="0.0" placeholder="Float">
+
+						<label for="AC_1002_Issue"><strong>AC 1002 Issue</strong></label>
+			  			<input type="text" id="AC_1002_Issue" name="AC_1002_Issue" value="0.0" placeholder="Float">
+
+						<label for="AC_1003_Issue"><strong>AC 1003 Issue</strong></label>
+  						<input type="text" id="AC_1003_Issue" name="AC_1003_Issue" value="0.0" placeholder="Float">
+					</li>
+					<li>
+						<label for="TV_2001_Issue"><strong>TV 2001 Issue</strong></label>
+			  			<input type="text" id="TV_2001_Issue" name="TV_2001_Issue" value="0.0" placeholder="Float">
+
+						<label for="TV_2002_Issue"><strong>TV 2002 Issue</strong></label>
+  						<input type="text" id="TV_2002_Issue" name="TV_2002_Issue" value="0.0" placeholder="Float">
+
+						<label for="TV_2003_Issue"><strong>TV 2003 Issue</strong></label>
+			  			<input type="text" id="TV_2003_Issue" name="TV_2003_Issue" value="0.0" placeholder="Float">
+					</li>
+					<li>
+						<label for="Claim_Value"><strong>Claim Value</strong></label>
+  						<input type="text" id="Claim_Value" name="Claim_Value" value = "20000.0" placeholder="Float">
+					</li>
+					<li>
+						<label for="Service_Centre"><strong>Service Centre</strong></label>
+			  			<input type="text" id="Service_Centre" name="Service_Centre" value="13.0" placeholder="Float">
+					</li>
+					<li>
+						<label for="Product_Age"><strong>Product Age</strong></label>
+  						<input type="text" id="Product_Age" name="Product_Age" value="16.0" placeholder="Float">
+					</li><li>
+						<p><strong>Purchased From</strong></p>
+					</li><li>
+						<input type="radio" id="Manufacturer" name="Purchased_from" value="Manufacturer" checked="checked">
+						<label for="Manufacturer">Manufacturer</label><br>
+						<input type="radio" id="Dealer" name="Purchased_from" value="Dealer">
+						<label for="Dealer">Dealer</label><br>
+						<input type="radio" id="Internet" name="Purchased_from" value="Internet">
+						<label for="Internet">Internet</label><br>
+					</li>
+					<li>
+						<label for="Call_details"><strong>Call Details</strong></label>
+  						<input type="text" id="Call_details" name="Call_details" value="2.5" placeholder="Float">
+					</li><li>
+						<p><strong>Purpose</strong></p>
+					</li><li>
+						<input type="radio" id="Other" name="Purpose" value="Other" checked="checked">
+						<label for="Other">Other</label><br>
+						<input type="radio" id="Claim" name="Purpose" value="Claim">
+						<label for="Claim">Claim</label><br>
+						<input type="radio" id="Complaint" name="Purpose" value="Complaint">
+						<label for="Complaint">Complaint</label><br>
+					</li>
+				</ul>
+				<button class= "submit" type="submit" >Submit</button>
+			</form>
+			<h2><p id="result">Waiting ...</p></h2>
+		</div>
+	</div>
+	<footer>
+		<div class="footer-container">
+			<h3>About</h3>
+			<ul>
+
+				<li>Tiago Pardal</li>
+				<li>Assignment done for Developing Intelligent Machine Learning Solutions</li>
+				<li>
+					<a href="https://github.com/tp323">
+						<img src="images/github.png" style="width: 25px;"/>
+					</a>
+					<a href="mailto:tiago.figueiredo1@student.um.si">
+						<img src="images/mail.png" style="width: 25px;"/>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</footer>
+</body>
+</html>
