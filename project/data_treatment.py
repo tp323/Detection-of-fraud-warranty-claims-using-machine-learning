@@ -17,7 +17,7 @@ def treat_data(data, random_state=None):
     # create pipelines
     num_pip = Pipeline(steps=[('impute', SimpleImputer()), ('standardize', StandardScaler())])
     cat_pip = Pipeline(steps=[('one-hot-encode', OneHotEncoder())])
-    full_processor = ColumnTransformer(transformers=[('number', num_pip, num_cols), ('category', cat_pip, cat_cols)])
+    pre_processor = ColumnTransformer(transformers=[('number', num_pip, num_cols), ('category', cat_pip, cat_cols)])
 
     # split data for training and testing
     X, y = data.drop("Fraud", axis='columns'), data['Fraud']
@@ -25,9 +25,9 @@ def treat_data(data, random_state=None):
 
     # treat data
     # y is not treated because it's numeric and does not require fill missing files and standardization
-    X_train = full_processor.fit_transform(X_train)
-    X_test = full_processor.fit_transform(X_test)
-    return X_train, X_test, y_train, y_test, full_processor
+    #X_train = pre_processor.fit_transform(X_train)
+    #X_test = pre_processor.fit_transform(X_test)
+    return X_train, X_test, y_train, y_test, pre_processor
 
 
 def read_and_treat_data(random_state=None):
