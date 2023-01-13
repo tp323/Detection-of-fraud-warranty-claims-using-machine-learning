@@ -4,7 +4,7 @@ import pandas as pd
 import pickle
 from flask_cors import CORS
 
-# Your API definition
+# API definition
 app = Flask(__name__)
 CORS(app)
 

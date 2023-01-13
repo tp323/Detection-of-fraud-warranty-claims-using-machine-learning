@@ -23,10 +23,6 @@ def treat_data(data, random_state=None):
     X, y = data.drop("Fraud", axis='columns'), data['Fraud']
     X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=.9, test_size=.1, random_state=random_state)
 
-    # treat data
-    # y is not treated because it's numeric and does not require fill missing files and standardization
-    #X_train = pre_processor.fit_transform(X_train)
-    #X_test = pre_processor.fit_transform(X_test)
     return X_train, X_test, y_train, y_test, pre_processor
 
 
