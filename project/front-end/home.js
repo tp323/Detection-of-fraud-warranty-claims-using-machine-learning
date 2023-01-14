@@ -22,11 +22,13 @@ document.addEventListener("DOMContentLoaded", function (ev) {
             result = "Waiting ..."
             color = "black"
             if(t == 1){
-                result = "Fraud"
+                result = "Fraudulent Claim"
                 color = "red"
             }else if(t == 0){
-                result = "No Fraud"
+                result = "No Fraud detected"
                 color = "green"
+            }else{
+                result = "Invalid Claim"
             }
             document.getElementById('result').innerHTML = result;
             document.getElementById('result').style.color = color;
