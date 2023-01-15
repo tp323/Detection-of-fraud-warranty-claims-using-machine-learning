@@ -30,7 +30,7 @@ def predict():
 
 
 if __name__ == '__main__':
-    with open("saved_model.plk", "rb") as file:
+    with open("model.pkl", "rb") as file:
         lr = pickle.load(file)
         print(lr)
     app.run(debug=True)

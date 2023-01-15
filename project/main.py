@@ -19,7 +19,7 @@ if __name__ == '__main__':
     ml_pipeline.fit(X_train, y_train)
     print(ml_pipeline.score(X_test, y_test))
     print(model_stats(y_test, ml_pipeline.predict(X_test)))
-    filename = 'saved_model.plk'
+    filename = 'model.pkl'
     pickle.dump(ml_pipeline, open(filename, 'wb'))
     loaded_model = pickle.load(open(filename, 'rb'))
     model_stats(y_test, loaded_model.predict(X_test))

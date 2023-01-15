@@ -7,3 +7,4 @@ gunicorn==20.1.0
 jinja2
 Werkzeug
 itsdangerous
+pandas==1.5.2
